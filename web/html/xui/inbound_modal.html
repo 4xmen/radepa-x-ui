@@ -1,0 +1,137 @@
+{{define "inboundModal"}}
+<a-modal id="inbound-modal" v-model="inModal.visible" :title="inModal.title" @ok="inModal.ok"
+         :confirm-loading="inModal.confirmLoading" :closable="true" :mask-closable="false"
+         :class="themeSwitcher.darkCardClass"
+         :ok-text="inModal.okText" cancel-text='{{ i18n "close" }}'>
+    {{template "form/inbound"}}
+</a-modal>
+<script>
+
+    const inModal = {
+        title: '',
+        visible: false,
+        confirmLoading: false,
+        okText: '{{ i18n "sure" }}',
+        isEdit: false,
+        confirm: null,
+        inbound: new Inbound(),
+        dbInbound: new DBInbound(),
+        ok() {
+            ObjectUtil.execute(inModal.confirm, inModal.inbound, inModal.dbInbound);
+        },
+        show({ title = '', okText = '{{ i18n "sure" }}', inbound = null, dbInbound = null, confirm = (inbound, dbInbound) => {}, isEdit = false }) {
+            this.title = title;
+            this.okText = okText;
+            if (inbound) {
+                this.inbound = Inbound.fromJson(inbound.toJson());
+            } else {
+                this.inbound = new Inbound();
+            }
+            if (dbInbound) {
+                this.dbInbound = new DBInbound(dbInbound);
+            } else {
+                this.dbInbound = new DBInbound();
+            }
+            this.confirm = confirm;
+            this.visible = true;
+            this.isEdit = isEdit;
+        },
+        close() {
+            inModal.visible = false;
+            inModal.loading(false);
+        },
+        loading(loading) {
+            inModal.confirmLoading = loading;
+        },
+        getClients(protocol, clientSettings) {
+            switch (protocol) {
+                case Protocols.VMESS: return clientSettings.vmesses;
+                case Protocols.VLESS: return clientSettings.vlesses;
+                case Protocols.TROJAN: return clientSettings.trojans;
+                case Protocols.SHADOWSOCKS: return clientSettings.shadowsockses;
+                default: return null;
+            }
+        },
+    };
+
+    const protocols = {
+        VMESS: Protocols.VMESS,
+        VLESS: Protocols.VLESS,
+        TROJAN: Protocols.TROJAN,
+        SHADOWSOCKS: Protocols.SHADOWSOCKS,
+        DOKODEMO: Protocols.DOKODEMO,
+        SOCKS: Protocols.SOCKS,
+        HTTP: Protocols.HTTP,
+    };
+
+    new Vue({
+        delimiters: ['[[', ']]'],
+        el: '#inbound-modal',
+        data: {
+            inModal: inModal,
+            Protocols: protocols,
+            SSMethods: SSMethods,
+            delayedStart: false,
+            get inbound() {
+                return inModal.inbound;
+            },
+            get dbInbound() {
+                return inModal.dbInbound;
+            },
+            get isEdit() {
+                return inModal.isEdit;
+            },
+            get client() {
+                return inModal.getClients(this.inbound.protocol, this.inbound.settings)[0];
+            },
+            get delayedExpireDays() {
+                return this.client && this.client.expiryTime < 0 ? this.client.expiryTime / -86400000 : 0;
+            },
+            set delayedExpireDays(days) {
+                this.client.expiryTime = -86400000 * days;
+            },
+            get multiDomain() {
+                return this.inbound.stream.tls.settings.domains.length > 0;
+            },
+            set multiDomain(value) {
+                if (value) {
+                    inModal.inbound.stream.tls.server = "";
+                    inModal.inbound.stream.tls.settings.domains = [{remark: "", domain: window.location.host.split(":")[0]}];
+                } else {
+                    inModal.inbound.stream.tls.server = "";
+                    inModal.inbound.stream.tls.settings.domains = [];
+                }
+            }
+        },
+        methods: {
+            streamNetworkChange() {
+                if (!inModal.inbound.canSetTls()) {
+                    this.inModal.inbound.stream.security = 'none';
+                }
+                if (!inModal.inbound.canEnableReality()) {
+                    this.inModal.inbound.reality = false;
+                }
+            },
+            setDefaultCertData(index) {
+                inModal.inbound.stream.tls.certs[index].certFile = app.defaultCert;
+                inModal.inbound.stream.tls.certs[index].keyFile = app.defaultKey;
+            },
+            setDefaultCertXtls(index) {
+                inModal.inbound.stream.xtls.certs[index].certFile = app.defaultCert;
+                inModal.inbound.stream.xtls.certs[index].keyFile = app.defaultKey;
+            },
+            async getNewX25519Cert() {
+                inModal.loading(true);
+                const msg = await HttpUtil.post('/server/getNewX25519Cert');
+                inModal.loading(false);
+                if (!msg.success) {
+                    return;
+                }
+                inModal.inbound.stream.reality.privateKey = msg.obj.privateKey;
+                inModal.inbound.stream.reality.settings.publicKey = msg.obj.publicKey;
+            }
+        },
+    });
+
+</script>
+{{end}}
