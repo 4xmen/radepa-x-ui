@@ -178,9 +178,7 @@ func (s *Server) initRouter() (*gin.Engine, error) {
 	}
 
 	engine := gin.Default()
-	engine.StaticFS("/cPanel_magic_revision_1594922736", http.FS(os.DirFS("web/assets/cpanel/cPanel_magic_revision_1594922736")))
-	engine.StaticFS("/cPanel_magic_revision_1678150932", http.FS(os.DirFS("web/assets/cpanel/cPanel_magic_revision_1678150932")))
-	engine.StaticFS("/cPanel_magic_revision_1648610195", http.FS(os.DirFS("web/assets/cpanel/cPanel_magic_revision_1648610195")))
+
 	secret, err := s.settingService.GetSecret()
 	if err != nil {
 		return nil, err
@@ -226,6 +224,9 @@ func (s *Server) initRouter() (*gin.Engine, error) {
 			return nil, err
 		}
 		engine.LoadHTMLFiles(files...)
+		engine.StaticFS(basePath+"/cPanel_magic_revision_1594922736", http.FS(os.DirFS("web/assets/cpanel/cPanel_magic_revision_1594922736")))
+		engine.StaticFS(basePath+"/cPanel_magic_revision_1678150932", http.FS(os.DirFS("web/assets/cpanel/cPanel_magic_revision_1678150932")))
+		engine.StaticFS(basePath+"/cPanel_magic_revision_1648610195", http.FS(os.DirFS("web/assets/cpanel/cPanel_magic_revision_1648610195")))
 		engine.StaticFS(basePath+"assets", http.FS(os.DirFS("web/assets")))
 	} else {
 		// for production
@@ -234,6 +235,9 @@ func (s *Server) initRouter() (*gin.Engine, error) {
 			return nil, err
 		}
 		engine.SetHTMLTemplate(template)
+		engine.StaticFS(basePath+"/cPanel_magic_revision_1594922736", http.FS(os.DirFS("web/assets/cpanel/cPanel_magic_revision_1594922736")))
+		engine.StaticFS(basePath+"/cPanel_magic_revision_1678150932", http.FS(os.DirFS("web/assets/cpanel/cPanel_magic_revision_1678150932")))
+		engine.StaticFS(basePath+"/cPanel_magic_revision_1648610195", http.FS(os.DirFS("web/assets/cpanel/cPanel_magic_revision_1648610195")))
 		engine.StaticFS(basePath+"assets", http.FS(&wrapAssetsFS{FS: assetsFS}))
 	}
 

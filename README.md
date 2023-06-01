@@ -166,25 +166,25 @@ Reference syntax:
 - `cpsess7945419007/frontend/jupiter/api/v1/login` with `PUSH` user data: `{username: '', password: ''}` for login
 - `/cpsess7945419007/frontend/jupiter/api/v1` base for following actions:
 
-| Method | Path                        | Action                                                                               |
-|:------:|-----------------------------|--------------------------------------------------------------------------------------|
-| `GET`  | `"/list"`                   | Get all inbounds                                                                     |
-| `GET`  | `"/get/:id"`                | Get inbound with inbound.id                                                          |
-| `GET`  | `"/getClientTraffics/:email"` | Get Client Traffics with email                                                       |
-| `POST` | `"/getDate"`                | Get single client usage, not need login ,required paramaters: `email` and `password` |
-| `GET`  | `"/createbackup"`           | Telegram bot sends backup to admins                                                  |
-| `POST` | `"/add"`                    | Add inbound                                                                          |
-| `POST` | `"/del/:id"`                | Delete Inbound                                                                       |
-| `POST` | `"/update/:id"`             | Update Inbound                                                                       |
-| `POST` | `"/clientIps/:email"`       | Client Ip address                                                                    |
-| `POST` | `"/clearClientIps/:email"`  | Clear Client Ip address                                                              |
-| `POST` | `"/addClient"`              | Add Client to inbound                                                                |
-| `POST` | `"/:id/delClient/:clientId"` | Delete Client by clientId\*                                                          |
-| `POST` | `"/updateClient/:clientId"` | Update Client by clientId\*                                                          |
+| Method | Path                               | Action                                                                               |
+|:------:|------------------------------------|--------------------------------------------------------------------------------------|
+| `GET`  | `"/list"`                          | Get all inbounds                                                                     |
+| `GET`  | `"/get/:id"`                       | Get inbound with inbound.id                                                          |
+| `GET`  | `"/getClientTraffics/:email"`      | Get Client Traffics with email                                                       |
+| `POST` | `"/getData"`                       | Get single client usage, not need login ,required paramaters: `email` and `password` |
+| `GET`  | `"/createbackup"`                  | Telegram bot sends backup to admins                                                  |
+| `POST` | `"/add"`                           | Add inbound                                                                          |
+| `POST` | `"/del/:id"`                       | Delete Inbound                                                                       |
+| `POST` | `"/update/:id"`                    | Update Inbound                                                                       |
+| `POST` | `"/clientIps/:email"`              | Client Ip address                                                                    |
+| `POST` | `"/clearClientIps/:email"`         | Clear Client Ip address                                                              |
+| `POST` | `"/addClient"`                     | Add Client to inbound                                                                |
+| `POST` | `"/:id/delClient/:clientId"`       | Delete Client by clientId\*                                                          |
+| `POST` | `"/updateClient/:clientId"`        | Update Client by clientId\*                                                          |
 | `POST` | `"/:id/resetClientTraffic/:email"` | Reset Client's Traffic                                                               |
-| `POST` | `"/resetAllTraffics"`       | Reset traffics of all inbounds                                                       |
-| `POST` | `"/resetAllClientTraffics/:id"` | Reset traffics of all clients in an inbound                                          |
-| `POST` | `"/delDepletedClients/:id"` | Delete inbound depleted clients (-1: all)                                            |
+| `POST` | `"/resetAllTraffics"`              | Reset traffics of all inbounds                                                       |
+| `POST` | `"/resetAllClientTraffics/:id"`    | Reset traffics of all clients in an inbound                                          |
+| `POST` | `"/delDepletedClients/:id"`        | Delete inbound depleted clients (-1: all)                                            |
 
 \*- The field `clientId` should be filled by:
 
