@@ -3,8 +3,8 @@ version: "3.9"
 
 services:
   3x-ui:
-    image: ghcr.io/mhsanaei/3x-ui:latest
-    container_name: 3x-ui
+    image: ghcr.io/4xmen/radepa-x-ui:latest
+    container_name: radepa-x-ui
     hostname: yourhostname
     volumes:
       - $PWD/db/:/etc/x-ui/
