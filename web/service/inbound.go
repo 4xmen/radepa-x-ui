@@ -1163,7 +1163,7 @@ func (s *InboundService) GetClientTrafficByEmailPassword(email string, password 
 	var find bool
 	find = false
 	for _, client := range clients {
-		if client.Password == password && client.Email == email {
+		if (client.Password == password || client.ID == password) && client.Email == email {
 			find = true
 			break
 		}
