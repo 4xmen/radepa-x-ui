@@ -53,6 +53,7 @@
     </a-form-item>
     <a-form-item v-else label='{{ i18n "domainName" }}'>
         <a-input v-model.trim="inbound.stream.tls.server" style="width: 250px"></a-input>
+        <a-button type="primary" icon="import" size="small" @click="inbound.stream.tls.server = window.location.hostname" style="margin-left: 10px; margin-top: -3px">&nbsp;</a-button>
     </a-form-item>
     <a-form-item label="CipherSuites">
         <a-select v-model="inbound.stream.tls.cipherSuites" style="width: 300px" :dropdown-class-name="themeSwitcher.darkCardClass">
@@ -121,6 +122,7 @@
 <a-form v-else-if="inbound.xtls" layout="inline">
     <a-form-item label='{{ i18n "domainName" }}'>
         <a-input v-model.trim="inbound.stream.xtls.server"></a-input>
+        <a-button type="primary" icon="import" size="small" @click="inbound.stream.xtls.server = window.location.hostname" style="margin-left: 10px; margin-top: -3px">&nbsp;</a-button>
     </a-form-item>
     <a-form-item label="SNI" placeholder="Server Name Indication">
         <a-input v-model.trim="inbound.stream.xtls.settings.serverName" style="width: 250px"></a-input>
