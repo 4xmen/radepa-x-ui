@@ -122,8 +122,8 @@
 <a-form v-else-if="inbound.xtls" layout="inline">
     <a-form-item label='{{ i18n "domainName" }}'>
         <a-input v-model.trim="inbound.stream.xtls.server"></a-input>
-        <a-button type="primary" icon="import" size="small" @click="inbound.stream.xtls.server = window.location.hostname" style="margin-left: 10px; margin-top: -3px">&nbsp;</a-button>
     </a-form-item>
+    <a-button type="primary" icon="import" size="small" @click="inbound.stream.xtls.server = window.location.hostname" style="margin-left: 10px; margin-top: -3px">&nbsp;</a-button>
     <a-form-item label="SNI" placeholder="Server Name Indication">
         <a-input v-model.trim="inbound.stream.xtls.settings.serverName" style="width: 250px"></a-input>
     </a-form-item>
