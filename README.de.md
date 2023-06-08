@@ -4,7 +4,7 @@
 
 # Languages
 
-[![]([https://custom-icon-badges.herokuapp.com/badge/comet%20ml-262c3e?style=for-the-badge&logo=germany-logo&logoColor=white](https://custom-icon-badges.herokuapp.com/badge/Deutch_Sprache-FF6A00?style=for-the-badge&logo=germany-logo&logoColor=white&logoWidth=50))](README.de.md)
+[![](https://custom-icon-badges.herokuapp.com/badge/Deutch_Sprache-FF6A00?style=for-the-badge&logo=germany-logo&logoColor=white&logoWidth=50)](README.de.md)
 
 
 Verstecken Sie Ihren Fußabdruck mit Radepa
