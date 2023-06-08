@@ -2,7 +2,7 @@
 ![4](./web/assets/svg/footprint.svg)
 
 
-# Languages
+# Sprachen
 
 [![](https://custom-icon-badges.herokuapp.com/badge/Deutch_Sprache-FF6A00?style=for-the-badge&logo=germany-logo&logoColor=white&logoWidth=50)](README.de.md)
 
