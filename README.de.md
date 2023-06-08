@@ -4,7 +4,7 @@
 
 # Languages
 
-![]([https://img.shields.io/badge/label-message-181717?style=for-the-badge&logo=github](https://img.shields.io/badge/-Deutsch%20Sprache-61DAFB?logo=appveyor&logoColor=white&logoWidth=30))
+![](https://img.shields.io/badge/-Deutsch%20Sprache-61DAFB?logo=appveyor&logoColor=white&logoWidth=30)
 
 Verstecken Sie Ihren Fußabdruck mit Radepa
 
