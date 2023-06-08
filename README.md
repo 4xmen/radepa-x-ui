@@ -1,6 +1,12 @@
 # radepa-x-ui
 ![4](./web/assets/svg/footprint.svg)
 
+# Languages
+
+[![](https://custom-icon-badges.herokuapp.com/badge/Deutch_Language-FF6A00?style=for-the-badge&logo=germany-logo&logoColor=white&logoWidth=50)](README.de.md)
+
+[![](https://custom-icon-badges.herokuapp.com/badge/English_Language-393185?style=for-the-badge&logo=united-kingdom&logoColor=white&logoWidth=50)](README.md)
+
 Hide your footprint with Radepa
 
 > **Disclaimer: This project is only for personal learning and communication, please do not use it for illegal purposes, please do not use it in a production environment**
