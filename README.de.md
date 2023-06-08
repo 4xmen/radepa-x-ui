@@ -4,7 +4,8 @@
 
 # Languages
 
-![](https://custom-icon-badges.herokuapp.com/badge/comet%20ml-262c3e?style=for-the-badge&logo=germany-logo&logoColor=white)
+[![](https://custom-icon-badges.herokuapp.com/badge/comet%20ml-262c3e?style=for-the-badge&logo=germany-logo&logoColor=white)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
 
 Verstecken Sie Ihren Fußabdruck mit Radepa
 
