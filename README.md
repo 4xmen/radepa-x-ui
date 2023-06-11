@@ -218,6 +218,72 @@ This panel extended from 3x-ui with no break changes, stable release and hidden 
 - CentOS 8+
 - Fedora 36+
 
+# Active proxy web server on 443 port for API
+```bash
+sudo apt update
+sudo apt-get install nginx -y
+sudo nano /etc/nginx/sites-enabled/default
+```
+Paste this:
+```
+# HTTP — redirect all traffic to HTTPS
+server {
+    if ($host = your.domain.name) {
+        return 301 https://$host$request_uri;
+    }
+        listen 80;
+        listen [::]:80  ;
+    server_name your.domain.name;
+    return 404;
+}
+```
+then to active ssl:
+```bash
+sudo nano /etc/nginx/sites-enabled/default
+```
+Paste this:
+```
+# rade pa proxy api
+server {
+	# Enable HTTP/2
+	listen 443 ssl http2;
+	listen [::]:443 ssl http2;
+	server_name your.domain.name;
+
+	# Use the Let’s Encrypt certificates
+	ssl_certificate /etc/letsencrypt/live/your.domain.name/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/your.domain.name/privkey.pem;
+
+	location / {
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host $host;
+		proxy_pass http://localhost:2086/;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "upgrade";
+	}
+}
+```
+
+> Don't forget you must change `ssl_certificate` and `ssl_certificate_key` and server port default is `2086`
+
+then:
+```bash
+# Check if all configured correctly
+sudo nginx -t
+
+# Restart nginx
+sudo systemctl restart nginx.service
+sudo systemctl status nginx.service
+
+# Auto renew SSL certificate
+sudo certbot renew --dry-run
+
+# Show certificates
+sudo certbot certificates
+```
+
+
 # Install with Docker
 
 
