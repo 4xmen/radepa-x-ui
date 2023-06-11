@@ -218,6 +218,41 @@ This panel extended from 3x-ui with no break changes, stable release and hidden 
 - CentOS 8+
 - Fedora 36+
 
+# Install with Docker
+
+
+1. Install Docker:
+
+   ```sh
+   bash <(curl -sSL https://get.docker.com)
+   ```
+
+2. Clone the Project Repository:
+
+   ```sh
+   git clone https://github.com/4xmen/radepa-x-ui.git
+   cd radepa-x-ui
+   ```
+
+3. Start the Service
+
+   ```sh
+   docker compose up -d
+   ```
+
+   OR
+
+   ```sh
+   docker run -itd \
+      -e XRAY_VMESS_AEAD_FORCED=false \
+      -v $PWD/db/:/etc/x-ui/ \
+      -v $PWD/cert/:/root/cert/ \
+      --network=host \
+      --restart=unless-stopped \
+      --name radepa-x-ui \
+      ghcr.io/4xmen/radepa-x-ui:latest
+   ```
+
 [//]: # (# Pictures)
 
 [//]: # ()
